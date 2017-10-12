@@ -99,8 +99,8 @@ int main() {
         if(protocol[i] == 'n')
         {
           printf("What is the inet6 address for the device you would like to send the key to?\n");
-          scanf("%d.%d.%d.%d", &IP1, &IP2, &IP3, &IP4);
-          sprintf(buffer69, "scp -6 -r %dir_buffer root@%d:%d:%d:%d", dir_buffer, IP1, IP2, IP3, IP4);
+          scanf("%d:%d:%d:%d", &IP1, &IP2, &IP3, &IP4);
+          sprintf(buffer69, "scp -6 -r %dir_buffer root@\[%d:%d:%d:%d"\], dir_buffer, IP1, IP2, IP3, IP4);
           system((char*)buffer69);
         }
       }
