@@ -1,4 +1,4 @@
-﻿/*
+/*
 This program is to assist as a toolset for OpenCl's FPGA SDK.  Since the OpenCL has a certain standard and procedure of compiling and transferring mehods to
 the board, this tool set was written to assist in plain english.
 */
@@ -14,14 +14,9 @@ the board, this tool set was written to assist in plain english.
 
 
 
-
-
-
 int main() {
 
-
   char configure[10];
-
 
   printf("Welcome to WMU's toolbelt for OpenCL FPGA SDK, what would you like to do?\n");
   while (1)
@@ -64,7 +59,6 @@ int main() {
     char buffer69[20];
     char userz[25];
 
-
   /*  printf("\n");
     sprintf(sys_buffer, "ssh-keygen -t dsa");
     system((char*)sys_buffer);
@@ -77,7 +71,6 @@ int main() {
     */
 }
 
-
   void Send()
   {
     unsigned short int IP1, IP2, IP3, IP4;
@@ -86,7 +79,6 @@ int main() {
     char dir_buffer[40];
     char buffer69[20];
     char protocol[25];
-
 
     printf("This will use secure copy on Intel's Embedded ARM Shell for Windows\n");
     printf("Please specify the name of the directory of compiled files you would like to send to the FPGA\n");
@@ -99,19 +91,17 @@ int main() {
         if(protocol[i] == 'n')
         {
           printf("What is the inet6 address for the device you would like to send the key to?\n");
-          scanf("%d:%d:%d:%d", &IP1, &IP2, &IP3, &IP4);
+          scanf("%d.%d.%d.%d", &IP1, &IP2, &IP3, &IP4);
           sprintf(buffer69, "scp -6 -r %dir_buffer root@\[%d:%d:%d:%d\]", dir_buffer, IP1, IP2, IP3, IP4);
           system((char*)buffer69);
         }
-      }
-      else
-      {
-        continue;
+        else
+        {
+            printf("What is the IPV4 for the device you would like to send the key to?\n");
+            scanf("%d.%d.%d.%d", &IP5, &IP6, &IP7, &IP8);
+            sprintf(buffer69, "scp -r %dir_buffer root@\[%d:%d:%d:%d\]", IP5, IP6, IP7, IP8);
+            system((char*)buffer69);
+        }
       }
     }
-  /*  printf("What is the IP for the device you would like to send the key to?\n");
-    scanf("%d.%d.%d.%d", &IP5, &IP6, &IP7, &IP8);
-    sprintf(buffer69, "ssh-copy-id root@%d.%d.%d.%d", IP5, IP6, IP7, IP8);
-    system((char*)buffer69);
-*/
-  }
+}
