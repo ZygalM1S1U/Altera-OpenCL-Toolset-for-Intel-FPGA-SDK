@@ -1,2 +1,12 @@
 README
 This toolset is incomplete and requires more work.  Commits will be made as time goes on.
+12-Oct-17
+Changes Committed:
+inet6 and IPV4 send commands for compilation were modified.  No directory was previosuly set for the target.
+14-Oct-17
+Changes commited:
+Dynamic memory allocation was added to certain pieces of the program.
+16-Oct-17
+changes commited:
+An interface for board configuration files was made along with adjustable settings which save as a text file.  DMA was used for
+file manipulations and management.  Functions to test DMA were also implemented as well as part of an interface for compilation.
