@@ -72,7 +72,7 @@ int main() {
     {
       printf("ARM GCC menu\n");
     }
-    else if(strlen == 7)
+    else if(strlen(userz) == 7)
     {
       printf("OpenCL menu:\nCompile Kernel File\n ");
     }
@@ -107,16 +107,16 @@ int main() {
       if(i == 1){
         if(protocol[i] == 'n')
         {
-          printf("What is the inet6 address for the device you would like to send the key to?\n");
+          printf("What is the inet6 address for the device you would like to send the directory to?\n");
           scanf("%d.%d.%d.%d", &IP1, &IP2, &IP3, &IP4);
-          sprintf(buffer69, "scp -6 -r %dir_buffer root@\[%d:%d:%d:%d\]", dir_buffer, IP1, IP2, IP3, IP4);
+          sprintf(buffer69, "scp -6 -r %s root@\[%d:%d:%d:%d\]", dir_buffer, IP1, IP2, IP3, IP4);
           system((char*)buffer69);
         }
         else
         {
             printf("What is the IPV4 for the device you would like to send the key to?\n");
             scanf("%d.%d.%d.%d", &IP5, &IP6, &IP7, &IP8);
-            sprintf(buffer69, "ssh-copy-id root@%d.%d.%d.%d", IP5, IP6, IP7, IP8);
+            sprintf(buffer69, "scp -r %s root@%d.%d.%d.%d",dir_buffer, IP5, IP6, IP7, IP8);
             system((char*)buffer69);
         }
       }
