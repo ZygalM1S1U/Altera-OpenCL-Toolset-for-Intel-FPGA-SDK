@@ -18,6 +18,8 @@ Dynamic memory allocation was added to certain pieces of the program.
 changes commited:
 An interface for board configuration files was made along with adjustable settings which save as a text file.  DMA was used for
 file manipulations and management.  Functions to test DMA were also implemented as well as part of an interface for compilation.
+17-Oct-17
+File load and board interface was updated.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -97,12 +99,12 @@ int main() {
     {
       BoardConfig();
     }
-    printf("Username on device to connect to?\n");
+    /*printf("Username on device to connect to?\n");
     scanf("%s", &userz);
     printf("What is the IP for the device you would like to send the key to?\n");
     //scanf("%d.%d.%d.%d", &IP11, &IP12, &IP13, &IP14);
     //sprintf(buffer69, "ssh-copy-id %s@%d.%d.%d.%d", userz, IP11, IP12, IP13, IP14);
-    system((char*)buffer69);
+    system((char*)buffer69);*/
 }
 
   void Send()
@@ -141,16 +143,17 @@ int main() {
 }
 
   void BoardConfig() {
-    FILE *fp, *fp1;
+    FILE *fp;
+    FILE *fw;
     char G1[255] = "boardnames.txt";
     char *Board_List;
-    int fileSize;
+    char boardName[CHUNK];
     long lSize;
     char buf[CHUNK];
     FILE *file;
     size_t nread;
 
-    fileSize =
+    fw = fopen(G1, "w+");
     fp = fopen(G1, "rb");
   	if (!fp) perror(G1), exit(1);
     fseek(fp, 0L, SEEK_END);
@@ -168,6 +171,11 @@ int main() {
     if(lSize == 0)
     {
       printf("There are currently no boards saved.  Would you like to set up a configuration setting for your board to make compilation faster?\n");
+      printf("Enter the board name to add to the configuration file.\n");
+      scanf("%s", &boardName);
+      fputs(boardName, fw);
+      fclose(fw);
+
     }
     else
     {
