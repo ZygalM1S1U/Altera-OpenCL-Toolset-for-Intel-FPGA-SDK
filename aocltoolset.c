@@ -11,13 +11,20 @@ the board, this tool set was written to assist in plain english.
 #include <sys/types.h>
 #include <dirent.h>
 #include<unistd.h>
+#define CHUNK 1024 /* read 1024 bytes at a time */
 
 
 
 int main() {
 
   char configure[10];
+  int memReady = 0;
 
+  memReady = Memcheck(memReady);
+  if(memReady == 1)
+  {
+    printf("Error\n");
+  }
   printf("Welcome to WMU's toolbelt for OpenCL FPGA SDK, what would you like to do?\n");
   while (1)
   {
@@ -47,7 +54,7 @@ int main() {
         }
         break;
         case 7:
-          printf("Here is where the compile function will be called.\n");
+          Compile();
     }
   }
 }
@@ -59,16 +66,26 @@ int main() {
     char buffer69[20];
     char userz[25];
 
-  /*  printf("\n");
-    sprintf(sys_buffer, "ssh-keygen -t dsa");
-    system((char*)sys_buffer);
+    printf("Compile Menu:\nOpenCL\nARM\nBoard Manager\n");
+    scanf("%s", &userz);
+    if(strlen(userz) == 4)
+    {
+      printf("ARM GCC menu\n");
+    }
+    else if(strlen == 7)
+    {
+      printf("OpenCL menu:\nCompile Kernel File\n ");
+    }
+    else
+    {
+      BoardConfig();
+    }
     printf("Username on device to connect to?\n");
     scanf("%s", &userz);
     printf("What is the IP for the device you would like to send the key to?\n");
     //scanf("%d.%d.%d.%d", &IP11, &IP12, &IP13, &IP14);
     //sprintf(buffer69, "ssh-copy-id %s@%d.%d.%d.%d", userz, IP11, IP12, IP13, IP14);
     system((char*)buffer69);
-    */
 }
 
   void Send()
@@ -99,9 +116,110 @@ int main() {
         {
             printf("What is the IPV4 for the device you would like to send the key to?\n");
             scanf("%d.%d.%d.%d", &IP5, &IP6, &IP7, &IP8);
-            sprintf(buffer69, "scp -r %dir_buffer root@\[%d:%d:%d:%d\]", IP5, IP6, IP7, IP8);
+            sprintf(buffer69, "ssh-copy-id root@%d.%d.%d.%d", IP5, IP6, IP7, IP8);
             system((char*)buffer69);
         }
       }
     }
+}
+
+  void BoardConfig() {
+    FILE *fp, *fp1;
+    char G1[255] = "boardnames.txt";
+    char *Board_List;
+    int fileSize;
+    long lSize;
+    char buf[CHUNK];
+    FILE *file;
+    size_t nread;
+
+    fileSize =
+    fp = fopen(G1, "rb");
+  	if (!fp) perror(G1), exit(1);
+    fseek(fp, 0L, SEEK_END);
+    lSize = ftell(fp);
+    rewind(fp);
+
+    /* allocate memory for entire content */
+    Board_List = calloc(1, lSize + 1);
+    if (!Board_List) fclose(fp), fputs("memory alloc fails\n", stderr), getchar(), exit(1);
+
+    /* copy the file into the buffer */
+    if (1 == fread(Board_List, lSize, 1, fp))
+      fclose(fp), free(Board_List), fputs("entire read fails\n", stderr), getchar(), exit(1);
+
+    if(lSize == 0)
+    {
+      printf("There are currently no boards saved.  Would you like to set up a configuration setting for your board to make compilation faster?\n");
+    }
+    else
+    {
+      printf("Boards configred:\n");
+      printf("\n");
+      if (fp)
+      {
+          while ((nread = fread(buf, 1, sizeof buf, file)) > 0)
+              fwrite(buf, 2, nread, stdout);
+          if (ferror(file))
+          {
+              printf("Corrupted board list.\n");
+          }
+          fclose(file);
+      }
+    }
+  /*  printf("Make sure the working directory is set properly.\nWhat is the filename for the first genome?\n");
+    scanf("%s", G1);
+    strcat(G1, ".txt");
+  */
+}
+
+int Memcheck() {
+	int *sack, *sack1, ay1 = 0;
+	printf("Loading...\n");
+	sack = malloc(1 * sizeof(*sack));
+	sack1 = malloc(1 * sizeof(*sack1));
+	if (sack == NULL) {
+		printf("Error, out of memory. Error Code: 1\n");
+		getchar();
+		ay1 = 2;
+		free(sack);
+		return 1;
+	}
+	else {
+		printf("\n");
+		int *temp = realloc(sack, 1 * sizeof(int));
+		if (temp != NULL) {
+			sack = temp;
+		}
+		else {
+			free(sack);
+			ay1 = 4;
+			printf("Error, plumbing unsuccessful. Error Code 3.\n");
+			getchar();
+		}
+
+	}
+	if (sack1 == NULL) {
+		printf("Error, out of memory.  Error Code 2\n");
+		getchar();
+		ay1 = 3;
+		free(sack1);
+		return 1;
+	}
+	else {
+		printf("Load successful.\n");
+		printf("Press any button to continue...\n");
+		getchar();
+		ay1 = 1;
+		int *temp1 = realloc(sack1, 1 * sizeof(int));
+		if (temp1 != NULL) {
+			sack1 = temp1;
+		}
+		else {
+			free(sack1);
+			printf("Error, plumbing not successful.  Error Code 4.\n");
+			getchar();
+			ay1 = 5;
+		}
+	}
 }
