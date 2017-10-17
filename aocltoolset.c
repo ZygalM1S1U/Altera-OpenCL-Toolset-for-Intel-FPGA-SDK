@@ -1,6 +1,23 @@
 /*
-This program is to assist as a toolset for OpenCl's FPGA SDK.  Since the OpenCL has a certain standard and procedure of compiling and transferring mehods to
-the board, this tool set was written to assist in plain english.
+Author: James A. Novorita
+Affliation: Western Michigan University
+Department: Electrical and Computer Engineering
+Section: Parallel Computing and Data Science
+Summary:
+This toolset is incomplete and requires more work.  Commits will be made as time goes on.  The purpose of this toolset is to
+allow for a smoother development cycle of OpenCL on the fly, in C.  This gives a basic interface for the developer and making
+the obscure compilation and transfer process a bit easier with AOCL.
+
+12-Oct-17
+Changes Committed:
+inet6 and IPV4 send commands for compilation were modified.  No directory was previosuly set for the target.
+14-Oct-17
+Changes commited:
+Dynamic memory allocation was added to certain pieces of the program.
+16-Oct-17
+changes commited:
+An interface for board configuration files was made along with adjustable settings which save as a text file.  DMA was used for
+file manipulations and management.  Functions to test DMA were also implemented as well as part of an interface for compilation.
 */
 #include <stdio.h>
 #include <stdlib.h>
