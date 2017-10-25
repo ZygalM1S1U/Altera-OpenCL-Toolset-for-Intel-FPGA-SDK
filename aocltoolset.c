@@ -18,8 +18,12 @@ Dynamic memory allocation was added to certain pieces of the program.
 changes commited:
 An interface for board configuration files was made along with adjustable settings which save as a text file.  DMA was used for
 file manipulations and management.  Functions to test DMA were also implemented as well as part of an interface for compilation.
-17-Oct-17
-File load and board interface was updated.
+20-Oct-17 
+changes:
+A help interface was added such that the user has more input for the functions inside the program.
+25-Oct-17
+changes committed:
+Help interface was committed, although incomplete.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,7 +60,7 @@ int main() {
         {
           if(configure[i] == 'H')
           {
-            printf("Here is the help screen\n");
+            helpScreen();
           }
           else if(configure[i] == 'S')
           {
@@ -247,4 +251,41 @@ int Memcheck() {
 			ay1 = 5;
 		}
 	}
+}
+
+void helpScreen() {
+
+  int exit = 0;
+  char configure[15];
+
+  printf("Welcome to the help screen.\n");
+  printf("Which function would you like to know more about?\n");
+  while(exit != 1) {
+    printf("\nOptions:\nSend\nCompile\nExit\n");
+    printf("User Cursor: ");
+    scanf("%s",&configure);
+    switch (strlen(configure)) {
+      case 4:
+        for(int i=0; i <= 1; ++i)
+        {
+          if(configure[i] == 'S')
+          {
+            printf("The Send function is able to send a file stream to a given board via scp.\nBoth inet6 addresses and ipv4 addresses are allowed.\n");
+            printf("Put some examples in here\n");
+          }
+          else if(configure[i] == 'E')
+          {
+            exit = 1;
+            printf("Exiting the help screen...\n");
+          }
+          else
+          {
+          printf("\nIncorrect command, try again.\n");
+          }
+        }
+        break;
+        case 7:
+        printf("The Compile library has a few options ARM and Board Manager\nARM deals with ARM compilation on the Host PC.\n");
+    }
+  }
 }
