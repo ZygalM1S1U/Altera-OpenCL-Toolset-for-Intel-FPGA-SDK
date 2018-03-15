@@ -1,0 +1,27 @@
+Author: James A. Novorita
+Affliation: Western Michigan University
+Department: Electrical and Computer Engineering
+Section: Parallel Computing and Data Science
+Summary:
+This toolset is incomplete and requires more work.  Commits will be made as time goes on.  The purpose of this toolset is to
+allow for a smoother development cycle of OpenCL on the fly, in C.  This gives a basic interface for the developer and making
+the obscure compilation and transfer process a bit easier with AOCL.
+
+12-Oct-17
+Changes Committed:
+inet6 and IPV4 send commands for compilation were modified.  No directory was previously set for the target.
+14-Oct-17
+changes committed:
+Dynamic memory allocation was added to certain pieces of the program.
+16-Oct-17
+changes committed:
+An interface for board configuration files was made along with adjustable settings which save as a text file.  DMA was used for
+file manipulations and management.  Functions to test DMA were also implemented as well as part of an interface for compilation.
+20-Oct-17
+changes:
+A help interface was added such that the user has more input for the functions inside the program.
+25-Oct-17
+changes committed:
+Help interface was committed, although incomplete.
+15-Mar-18
+changes committed:
